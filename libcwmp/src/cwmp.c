@@ -1359,6 +1359,7 @@ int cwmp_parse_getparametervalues_message(env_t * env , xmldoc_t * doc, paramete
                 }
                 (*ppl)->parameters = pp;
                 (*ppl)->size += CWMP_RENEW_SIZE;
+                nextpv = (*ppl)->parameters+(*ppl)->count;
             }
 
             (*ppl)->count ++;
@@ -1796,7 +1797,8 @@ xmlnode_t * cwmp_create_event_node(env_t * env ,  xmlnode_t * parent, const even
 	if (pe[count]->event == INFORM_MREBOOT ) //|| pe[count]->event == INFORM_BOOTSTRAP)
 	{
         	ESA(eventCommandKeyNode, cwmp_xml_create_child_node(env ,  eventStructNode, NULL, "CommandKey", pe[count]->command_key));
-	}
+
+	}
 	else
 	{
 		ESA(eventCommandKeyNode, cwmp_xml_create_child_node(env ,  eventStructNode, NULL, "CommandKey", NULL));
